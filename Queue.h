@@ -64,25 +64,36 @@ void Queue::printQueue(){
 }
 
 void Queue::nextLeg(){
-	Queue tempQ = Queue();
-    Team* fastest = pop();
-    fastest->setTime();
-
+	Queue* tempQ = new Queue();
+    Team* fastest = NULL;
+	int teamsToSort = size;
+	int itemsInQueue;
     //function is still reordering the main queue
-    bool calculating = true;
-    do{
-    	for(int i = 0; i < size; i++){
-        	Team* fromOrig = peek();
-            if(fastest->ranFaster(fromOrig)){
-            	tempQ.push(pop());
-            }
-            else{
-                push(fastest);
-                fastest = pop();
-            }
-        }
-        if(tempQ.getSize() == size - 1)
-            calculating = false;
-     }while(calculating);
+	do{
+		cerr << "Do while loop beg" << endl;	
+		fastest = pop();					//store first as fastest
+		fastest->setTime();					//set its time
+		fastest->lapToggle();				//Team time set this lap
+		itemsInQueue = size;			//# teams this round
+		Team* nextTeam = peek();			//next item for comparison
+		if(!(nextTeam->getLapTimed()))		//if the team hasn't had a new time generated this lap
+			nextTeam->setTime();			//set a new time
+			nextTeam->lapToggle();			//flip the toggle
+		if(fastest->ranFaster(nextTeam)){	//if fastest is fastest
+			push(nextTeam);					//push the compared team back onto the queue
+		}
+		else{								//Otherwise,
+			push(fastest);					//push the fastest item back onto the queue
+			fastest = nextTeam;				//set the new team as the fastest
+		}
+		if(itemsInQueue == teamsToSort - 1){	//if there are no more teams to compare this fastest with
+			tempQ->push(fastest);				//push the fastest onto the temp queue
+			teamsToSort--;						//there is one less team to sort now
+		}
+		cerr << "Do while loop end" << endl;
+	}while(teamsToSort > 0);					//as long as there are teams to sort
+	for(int i = 0; i < tempQ->getSize(); i++){	//replace the original queue with the fastest times stored in the temp queue
+		Team* toOrig = tempQ->pop();
+		push(toOrig);
+	}	
 }
-

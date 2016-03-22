@@ -26,6 +26,8 @@ int main(int argc, char** argv) {
 	cout << other->getName() << endl;
 	cerr << "--Print queue." << endl;
 	theRace.printQueue();
+	theRace.nextLeg();
+	theRace.printQueue();
     return 0;
 }
 
