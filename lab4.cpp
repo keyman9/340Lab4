@@ -7,9 +7,9 @@
 
 #include <cstdlib>
 #include <string>
+#include <iostream>
 #include <fstream>
 #include "Queue.h"
-using namespace std;
 
 void readTeamName(Queue &list);
 

@@ -1,27 +1,40 @@
-#include <string>
-#include <stdlib.h>
+#include<string>
+#include<cstdlib>
 #include "Time.h"
 
-using namespace std;
 
 class Team{
 private:
     string name;
 	Team* next;
 	Team* prev;
+	Time* top;
 public:
 	Team();
 	Team(string Name);
 	string getName();
-	Time* top;
 	void setTime();
 	Time* getTime(){ return top; }
+	bool ranFaster(Team* compare);
 	Team* getNext(){ return next; }
 	void setNext(Team* n){ next = n; }
 	Team* getPrev(){ return prev; }
 	void setPrev(Team* p){ prev = p; }
 };
 
+bool Team::ranFaster(Team* compare){
+	if(top->hour > compare->getTime()->hour){
+		return false;
+	}
+	else if (top->hour == compare->getTime()->hour){
+		if(top->min > compare->getTime()->min){
+			return false;
+		}
+	}
+	else{
+		return true;
+	}
+}
 void Team::setTime(){
     Time *t;
     t->hour = rand() % 23 + 5;

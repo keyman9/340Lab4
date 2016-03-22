@@ -7,4 +7,3 @@ struct Time{
     Time *prev;
     Time(){ hour = min = 0; }
 };
-
