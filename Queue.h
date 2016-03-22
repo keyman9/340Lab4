@@ -7,6 +7,7 @@ class Queue{
 		int size;
 	public:
 		Queue(){ head = tail = NULL; size = 0; }
+		~Queue(){};
 		void push(Team* n);
 		Team* peek();
 		Team* pop();
