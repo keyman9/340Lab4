@@ -14,6 +14,7 @@ private:
 public:
 	Team();
 	Team(string Name);
+	~Team(){ delete next; delete prev; delete top; }
 	string getName();
 	bool getLapTimed(){ return lapTimed; }
 	void lapToggle(){ lapTimed = !lapTimed; }
@@ -53,13 +54,13 @@ Team::Team(){
     name = "";
 	next=prev=NULL;
 	lapTimed = false;
-	top =  new Time;
+	top = new Time();
 }
 
 Team::Team(string Name){
     name = Name;
 	lapTimed = false;
-	top = new Time;
+	top = new Time();
     top->hour=0;
     top->min=0;
     top->next=NULL;

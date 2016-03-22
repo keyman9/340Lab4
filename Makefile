@@ -1,9 +1,9 @@
-output: lab4.o
-	g++ lab4.o -o output
+all: lab4
+	
 
 lab4: lab4.cpp
-	g++ -c lab4.cpp
+	g++ lab4.cpp -o lab4
 
 clean:
-	rm *.o output
+	$(RM) lab4
 
