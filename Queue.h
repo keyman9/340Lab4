@@ -1,4 +1,4 @@
-#include"Team.cpp"
+#include"Team.h"
 #include<iostream>
 
 using namespace std;
