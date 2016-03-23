@@ -16,7 +16,7 @@ class Queue{
 		void setTail(Team* n){tail = n;}
 		void setHead(Team* n){head = n;}
 		void printQueue();
-		void nextLeg();
+		Team* nextLeg(string city,int lap);
 };
 
 void Queue::push(Team* n){
@@ -38,6 +38,7 @@ void Queue::push(Team* n){
 
 Team* Queue::peek(){
 	if(size == 0){
+		cout << size << " size" << endl;
     	cout << "\nEmpty queue." << endl;
         return NULL;
     }
@@ -63,45 +64,57 @@ void Queue::printQueue(){
    	}
 }
 
-void Queue::nextLeg(){
+Team* Queue::nextLeg(string city, int lap){
 	Queue tempQ = Queue();
-    Team* fastest = NULL;
-	int teamsToSort = size;
-	int itemsInQueue;
+	cerr << "Temp queue contents: " << endl;
+	tempQ.printQueue();
+	cerr << "---End temp Queue--" << endl;
+	Team* fastest = pop();
+    Team* nextTeam = NULL;
+
     //function is still reordering the main queue
-	do{
-		cerr << "Do while loop beg" << endl;	
-		fastest = pop();					//store first as fastest
-		fastest->setTime();					//set its time
-		fastest->lapToggle();				//Team time set this lap
-		itemsInQueue = size;			//# teams this round
-		if(peek() == NULL){
-			break;
-		}
-		else{
-			Team* nextTeam = peek();			//next item for comparison
-			if(!(nextTeam->getLapTimed()))		//if the team hasn't had a new time generated this lap
-				nextTeam->setTime();			//set a new time
-				nextTeam->lapToggle();			//flip the toggle
+	for(int n = size; n > 0; n--){
+		cerr << "First for begin" << endl;						//store first as fastest
+		cerr << fastest->getName() << " is fastest." << endl;
+		fastest->setTime(city);					//set its time
+		cerr << "Time set." << endl;				//Team time set this lap
+		for(int i = n-1; i > 0; i--){
+			cerr << "----------INNER FOR----------" <<endl;			//# teams this round
+			cerr << "Teams still to run: " << i << endl;
+			cerr << "Fastest so far: " << fastest->getName() << endl;
+			nextTeam = pop();			//next item for comparison
+			cerr << nextTeam->getName() << " peeked" << endl;
+			if(nextTeam->getCity() != city){		//if the team hasn't had a new time generated this lap
+				nextTeam->setTime(city);			//set a new time
+				cerr << "Time set." << endl;
+			}
 			if(fastest->ranFaster(nextTeam)){	//if fastest is fastest
-				push(nextTeam);					//push the compared team back onto the queue
+				push(nextTeam);			//push the compared team back onto the queue
+				cerr << nextTeam->getName() << " pushed back into original" << endl;
+			}
+			else if(i == 1){
+				tempQ.push(fastest);				//push the fastest onto the temp queue
+				cerr << "TempQ now contains " << peek()->getName() << endl;
+				cerr << "Teams to sort: " << n << endl;
+				cerr << "Teams to sort decremented: " << n << endl;
 			}
 			else{								//Otherwise,
 				push(fastest);					//push the fastest item back onto the queue
-				fastest = nextTeam;				//set the new team as the fastest
+				cerr << fastest->getName() << " pushed" << endl;
+				fastest = nextTeam;//set the new team as the fastest
+				cerr << "New fastest: " << fastest->getName() << endl;
 			}
-			if(itemsInQueue == teamsToSort - 1){	//if there are no more teams to compare this fastest with
-				tempQ.push(fastest);				//push the fastest onto the temp queue
-				teamsToSort--;						//there is one less team to sort now
-			}
-			cerr << "End else" << endl;
+			cerr << "!!!!!!OUTER FOR!!!!!!!" << endl;
 		}
-		cerr << "Do while loop end" << endl;
-	}while(teamsToSort > 0);					//as long as there are teams to sort
-	cerr << "Out of while" << endl;
-	while(tempQ.peek() != NULL){	//replace the original queue with the fastest times stored in the temp queue
-		Team* toOrig = tempQ.pop();
-		push(toOrig);
-	}
-	cerr << "Bottom" << endl;	
+		cerr << "Outer for loop end" << endl;
+	}cerr << "Out of outer for while" << endl;
+	while(tempQ.getSize() > 0){	//replace the original queue with the fastest times stored in the temp queue
+		Team* toTransfer = tempQ.peek();
+		if(tempQ.getSize() != 1){
+			push(tempQ.pop());
+		}
+		else{
+			return toTransfer;
+		}
+	}	
 }

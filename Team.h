@@ -18,9 +18,10 @@ public:
 	string getName();
 	bool getLapTimed(){ return lapTimed; }
 	void lapToggle(){ lapTimed = !lapTimed; }
-	void setTime();
+	void setTime(string c);
 	Time* getTime(){ return top; }
 	bool ranFaster(Team* compare);
+	string getCity(){ return top->city; }
 	Team* getNext(){ return next; }
 	void setNext(Team* n){ next = n; }
 	Team* getPrev(){ return prev; }
@@ -35,15 +36,21 @@ bool Team::ranFaster(Team* compare){
 		if(top->min > compare->getTime()->min){
 			return false;
 		}
+		else{
+			return true;
+		}
 	}
 	else{
 		return true;
 	}
 }
-void Team::setTime(){
-    Time *t;
+void Team::setTime(string c){
+    Time *t = new Time();
+    t->city = c;
     t->hour = rand() % 23 + 5;
+    cout << "Hour:\t" << t->hour << endl;
     t->min = rand() % 59 + 0;
+    cout << "Min:\t" << t->min << endl; 
     t->next = NULL;
     top->next= t;
 	t->prev = top;

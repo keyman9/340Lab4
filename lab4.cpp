@@ -25,31 +25,38 @@ int main() {
 	cout <<endl;
 	cout <<"Enter cit list file name: ";
 	cout <<endl;
-	int round = 0;
-	vector<string> cities = readCityName(round);
+	int lap = 0;
+	vector<string> cities = readCityName(lap);
+
+
 	Queue theRace = Queue();
+	Queue theFinish = Queue();
+
     readTeamName(theRace);
-	//cerr << "--Print queue." << endl;
-	//theRace.printQueue();
-	//Team* thisThingy = theRace.pop();
-	//cerr << "--Pop: ";
-	//cout << thisThingy->getName() << endl;
-	//Team* other = theRace.pop();
-	//cerr << "--Pop ";
-	//cout << other->getName() << endl;
-	//cerr << "--Print queue." << endl;
-	//theRace.printQueue();
-	//theRace.nextLeg();
-	//theRace.printQueue();
+	cerr << "--Print queue." << endl;
+	theRace.printQueue();
 
-	cout <<"This is the round vale " <<round <<endl;
+	cerr << "--Print queue." << endl;
+	theRace.printQueue();
 
-	for (int x = 0; x < round; x ++){
+	cerr << "Original Size: " << theRace.getSize() << endl;
+	string nextCity = "Brussels";
+	//while cities to race
+	theFinish.push(theRace.nextLeg(nextCity,lap));
+	cerr << "Original Queue: " << endl;
+	theRace.printQueue();
+	cerr << "Finish Queue after round 1: " << endl;
+	theFinish.printQueue();
+
+///
+	cout <<"This is the round vale " << lap <<endl;
+
+	for (int x = 0; x < lap; x ++){
 		cout <<"The "<<x <<" were the last team to reach " <<cities[x]<<endl;
 
 	}
 	cout <<"TEAMS         ";
-	for (int x = 0; x < round; x ++){
+	for (int x = 0; x < lap; x ++){
 		cout<< "      Round " << x;
 			}
 	cout <<endl;
@@ -76,7 +83,7 @@ void readTeamName(Queue &list){
 
 }
 
-vector<string> readCityName(int &round){
+vector<string> readCityName(int &lap){
 	ifstream infile;
 	string cityName;
 	vector<string> city;
@@ -85,6 +92,6 @@ vector<string> readCityName(int &round){
 		getline(infile,cityName);
 		city.push_back(cityName);
 	}
-	round =city.size();
+	lap =city.size();
 	return city;
 }
