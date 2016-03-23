@@ -21,17 +21,17 @@ class Queue{
 
 void Queue::push(Team* n){
 	if(size == 0){ 
-		head = tail = NULL;
     	head = tail = n;
         head->setNext(tail);
         head->setPrev(NULL);
         tail->setPrev(head);
+		tail->setNext(NULL);
     }
     else{   
         n->setNext(NULL);
         n->setPrev(tail);
         tail->setNext(n);
-        setTail(n); 
+        tail = n; 
     }
     size++;
 }
@@ -91,7 +91,7 @@ void Queue::nextLeg(string city, Team* slowest){
 			//# teams this round
 			cerr << "Teams still to run: " << j << endl;
 			cerr << "Fastest so far: " << fastest->getName() << endl;
-			nextTeam = pop();			
+			nextTeam = peek();			
 			//next item for comparison
 			cerr << nextTeam->getName() << " peeked" << endl;
 			if(nextTeam->getCity() != city){		
@@ -108,7 +108,7 @@ void Queue::nextLeg(string city, Team* slowest){
 				push(fastest);			
 				//push the next team back onto the queue
 				cerr << "Original now contains prev fastest: " << fastest->getName() << endl;
-				fastest = nextTeam;
+				fastest = pop();
 				j--;
 			}
 			else if(fastest->ranFaster(nextTeam)){ 
@@ -116,7 +116,7 @@ void Queue::nextLeg(string city, Team* slowest){
 				if(j == 1){
 					tempQ.push(fastest);
 					cerr << fastest->getName() << " was the fastest team, pushed to the temp queue."  << endl;
-					fastest=nextTeam;
+					fastest = pop();
 					j--;
 				}
 				else{
