@@ -7,21 +7,17 @@
 
 #include <cstdlib>
 #include <string>
+#include <vector>
 #include <iostream>
 #include <fstream>
 #include "Queue.h"
-#include <vector>
 
- using namespace std;
+using namespace std;
 
 void readTeamName(Queue &list);
-void readCityName();
-int round = 0;
-string teamfile;
-string cityfile;
-vector<string> city;
+vector<string> readCityName(int &round);
 
-int main(int argc, char** argv) {
+int main() {
 	cout <<"##################################"<<endl;
 	cout <<"## WELCOME TO THE AMAZING RACE! ##"<<endl;
 	cout <<"##################################"<<endl;
@@ -29,7 +25,8 @@ int main(int argc, char** argv) {
 	cout <<endl;
 	cout <<"Enter cit list file name: ";
 	cout <<endl;
-	readCityName();
+	int round = 0;
+	vector<string> cities = readCityName(round);
 	Queue theRace = Queue();
     readTeamName(theRace);
 	//cerr << "--Print queue." << endl;
@@ -48,7 +45,7 @@ int main(int argc, char** argv) {
 	cout <<"This is the round vale " <<round <<endl;
 
 	for (int x = 0; x < round; x ++){
-		cout <<"The "<<x <<" were the last team to reach " <<city[x]<<endl;
+		cout <<"The "<<x <<" were the last team to reach " <<cities[x]<<endl;
 
 	}
 	cout <<"TEAMS         ";
@@ -79,13 +76,15 @@ void readTeamName(Queue &list){
 
 }
 
-void readCityName(){
+vector<string> readCityName(int &round){
 	ifstream infile;
 	string cityName;
+	vector<string> city;
 	infile.open("cities.txt");
 	while(!infile.eof()){
 		getline(infile,cityName);
 		city.push_back(cityName);
 	}
 	round =city.size();
+	return city;
 }
