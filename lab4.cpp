@@ -21,7 +21,7 @@ int main() {
 	cout <<"##################################"<<endl;
 	cout <<"## WELCOME TO THE AMAZING RACE! ##"<<endl;
 	cout <<"##################################"<<endl;
-	cout <<"Enter team list file naem: ";
+	cout <<"Enter team list file name: ";
 	cout <<endl;
 	cout <<"Enter cit list file name: ";
 	cout <<endl;
@@ -33,9 +33,7 @@ int main() {
 	Queue theFinish = Queue();
 
     readTeamName(theRace);
-	cerr << "--Print queue." << endl;
-	theRace.printQueue();
-
+	
 	cerr << "--Print queue." << endl;
 	theRace.printQueue();
 

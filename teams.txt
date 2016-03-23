@@ -1,5 +1,3 @@
-Orange
-Red
-Blue
-Purple
-Yellow
+orange
+red
+blue
