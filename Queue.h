@@ -66,14 +66,15 @@ void Queue::printQueue(){
 }
 
 Team* Queue::nextLeg(string city){
-	cout <<"inside the nextLeg method"<<endl;
+	//cout <<"inside the nextLeg method"<<endl;
 	//Team* race = new Team[size];
+	Team* slowest; 
 	Team *race [size];
 	int itemCount = size;
 	Team *fastest =  NULL;
 	Team *next = NULL;
 	for(int i = 0; i < itemCount; i++){
-		cout <<"inside the first for loop"<<endl;
+		//cout <<"inside the first for loop"<<endl;
 		Team *temp = pop();
 		temp->setTime(city);
 		race[i] = temp;
@@ -82,13 +83,20 @@ Team* Queue::nextLeg(string city){
 	}
 	for(int n=0; n < size; n++){
 		fastest = race[n];
+		cout << fastest->getTime()<<endl;
 		for (int i = n + 1; i < size; i ++){
 			next= race[i];
 			if(fastest->getTimeInMin() > next->getTimeInMin()){
 				fastest = next;
 			}	
 		}
+		if (size > 1){
 		push(fastest);
 	}
+	if (size =1){
+		slowest = fastest;
+	}
+	}
+	return slowest;
 }
 

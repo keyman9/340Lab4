@@ -24,10 +24,10 @@ int main() {
 	cout <<"## WELCOME TO THE AMAZING RACE! ##"<<endl;
 	cout <<"##################################"<<endl;
 	cout <<"Enter team list file name: ";
-	cin >> teamFile;
+	//cin >> teamFile;
 	cout <<endl;
 	cout <<"Enter city list file name: ";
-	cin >> cityFile;
+	//cin >> cityFile;
 	cout <<endl;
 	int lap = 0;
 	vector<string> cities = readCityName();
@@ -86,7 +86,8 @@ vector<string> readCityName(){
 	ifstream infile;
 	string cityName;
 	vector<string> city;
-	infile.open(cityFile.c_str());
+	//infile.open(cityFile.c_str());
+	infile.open("cities.txt");
 	while(!infile.eof()){
 		getline(infile,cityName);
 		if(cityName!=""){
@@ -100,7 +101,8 @@ vector<string> readTeamNames(){
 	ifstream infile;
 	string teamName;
 	vector<string> teamNames;
-	infile.open(teamFile.c_str());
+	//infile.open(teamFile.c_str());
+	infile.open("teams.txt");
 	while(!infile.eof()){
 		getline(infile,teamName);
 		if(teamName!=""){
