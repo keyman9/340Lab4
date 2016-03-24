@@ -15,8 +15,8 @@
 using namespace std;
 
 void readTeamName(Queue &list);
-vector<string> readCityName(int &round);
-vector <Team> teamList;
+vector<string> readCityName();
+vector<string> readTeamNames();
 int main() {
 	cout <<"##################################"<<endl;
 	cout <<"## WELCOME TO THE AMAZING RACE! ##"<<endl;
@@ -26,13 +26,13 @@ int main() {
 	cout <<"Enter city list file name: ";
 	cout <<endl;
 	int lap = 0;
-	vector<string> cities = readCityName(lap);
-
+	vector<string> cities = readCityName();
+	vector<string> teamNames = readTeamNames();
 
 	Queue theRace = Queue();
 	Queue theFinish = Queue();
 
-    readTeamName(theRace);
+   // readTeamName(theRace);
    
 	cerr << "--Print queue." << endl;
 	theRace.printQueue();
@@ -76,7 +76,9 @@ int main() {
 
 }
 
-	void readTeamName(Queue &list){
+
+/*
+void readTeamName(Queue &list){
     ifstream infile;
     infile.open("teams.txt");
 	string teamName;
@@ -86,22 +88,43 @@ int main() {
  	while(!infile.eof()){
 		getline(infile,teamName);
 		if (teamName!=""){
-  		tempTeam = new Team(teamName);
-  		teamList.push_back(tempTeam);
-		list.push(tempTeam);
+  			tempTeam = new Team(teamName);
+  			teamList.push_back(tempTeam);
+			list.push(tempTeam);
 		}
 	}
 }
+*/
 
-vector<string> readCityName(int &lap){
+
+
+vector<string> readCityName(){
 	ifstream infile;
 	string cityName;
 	vector<string> city;
 	infile.open("cities.txt");
 	while(!infile.eof()){
 		getline(infile,cityName);
-		city.push_back(cityName);
+		if(cityName!=""){
+			city.push_back(cityName);
+		}
 	}
-	lap =city.size();
 	return city;
 }
+
+vector<string> readTeamNames(){
+	ifstream infile;
+	string teamName;
+	vector<string> teamNames;
+	infile.open("teams.txt");
+	while(!infile.eof()){
+		getline(infile,teamName);
+		if(teamName!=""){
+			teamNames.push_back(teamName);
+		}
+	}
+	return teamNames;
+}
+
+
+
