@@ -32,7 +32,10 @@ int main() {
 	Queue theRace = Queue();
 	Queue theFinish = Queue();
 
-   // readTeamName(theRace);
+	for(int i = 0; i < teamNames.size(); i++){
+		theRace.push(new Team(teamNames.at(i)));
+	   // readTeamName(theRace);
+	}
    
 	cerr << "--Print queue." << endl;
 	theRace.printQueue();
