@@ -17,7 +17,7 @@ class Queue{
 		void setHead(Team* n){head = n;}
 		void printQueue();
 		Team* nextLeg(string city);
-		Team * fastestTeam(Team* t[], int size);
+		//Team * fastestTeam(Team* t[], int size);
 };
 
 void Queue::push(Team* n){
@@ -67,41 +67,28 @@ void Queue::printQueue(){
 
 Team* Queue::nextLeg(string city){
 	cout <<"inside the nextLeg method"<<endl;
-	Team* race = new Team[size];
+	//Team* race = new Team[size];
+	Team *race [size];
 	int itemCount = size;
-	for(int i = 0; i < itemCount; i++){
-		cout <<"inside the first for loop"<<endl;
-		Team* temp = pop();
-		temp->setTime(city);
-		race[i] = *temp;
-		cerr << "race set to temp" << endl;
-	}
-	cerr << "All items added to array" << endl;
-	Team *Order = fastestTeam(&race, size);
-	cerr << "Ordered set" << endl;
-	for(int i = 0; i < size; i++){
-		cout << Order<<endl;
-		cout <<"print test" <<endl;
-		//push(race[i])	
-	} 	
-}
-Team * Queue::fastestTeam(Team* t[], int size){
-	Team** tempArray = new Team*[size];
 	Team *fastest =  NULL;
 	Team *next = NULL;
+	for(int i = 0; i < itemCount; i++){
+		cout <<"inside the first for loop"<<endl;
+		Team *temp = pop();
+		temp->setTime(city);
+		race[i] = temp;
+		//cout << race[i] <<endl;
+		cerr << "race set to temp" << endl;
+	}
 	for(int n=0; n < size; n++){
-		fastest = t[n];
+		fastest = race[n];
 		for (int i = n + 1; i < size; i ++){
-			next= t[i];
-			if(fastest->getTimeInMin() < next->getTimeInMin()){
-				tempArray[n]= t[n];
-			}
-			else{
-				fastest= t[i];
+			next= race[i];
+			if(fastest->getTimeInMin() > next->getTimeInMin()){
+				fastest = next;
 			}	
 		}
-		tempArray[n] = fastest;
+		push(fastest);
 	}
-	return *tempArray;
 }
 
