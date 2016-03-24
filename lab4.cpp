@@ -57,7 +57,7 @@ int main() {
 	//for(int i = 0; i < teamsInRace; teamsInRace--){
 		//for(int j = 0; j < cities.size(); j++){
 			theRace.nextLeg(nextCity,teamsInRace,slowest);
-			theFinish.push(slowest);
+			//theFinish.push(slowest);
 		//}
 	//}
 

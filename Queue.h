@@ -84,17 +84,17 @@ Team* Queue::nextLeg(string city, int teamsRacing, Team* slowest){
 		temp->setTime(city);
 		race.push_back(temp);
 		cout << race[i]->getName() <<endl;
-		cerr << "race set to temp" << endl;
 		tempCount++;
 	}
 	cout << "After first for" << endl;
 	for(int n=0; n < itemCount; n++){
 		cout << race[n]->getName() << " in second for loop" << endl;
 		fastest = race[n];
-		cout << "Here" << endl;
 		cout << fastest->getName()<<endl;
 		int fastestIndex = n;
-		for (int i = n + 1; i < itemCount; i++){
+
+
+		for (int i = n+ 1; i < itemCount; i++){
 			if(i < teamsRacing){
 				next= race[i];
 				cerr << i << " i value" << endl;
@@ -103,19 +103,22 @@ Team* Queue::nextLeg(string city, int teamsRacing, Team* slowest){
 					fastestIndex = i;
 				}
 			}
-			cout << "After if" << endl;
 		}
 		
 		if (tempCount > 1){
 			push(fastest);
 			cerr << "Pushed " << fastest->getName() << endl;
 			tempCount--;
+
 		}
 		else{
 			slowest = fastest;
 		}
 
 	}
-	delete fastest;
-	delete next;
+	//delete fastest;
+	//delete next;
+	cout << "The slowest is " << slowest->getName()<<endl;
+
+	return slowest;
 }
