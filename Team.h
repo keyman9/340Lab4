@@ -50,9 +50,9 @@ void Team::setTime(string c){
     //cerr <<" created the time object t"<<endl;
     t->city = c;
     t->hour = rand() % 23 + 5;
-    cerr << "Hour:\t" << t->hour << endl;
+   // cerr << "Hour:\t" << t->hour << endl;
     t->min = rand() % 59 + 0;
-    cerr << "Min:\t" << t->min << endl; 
+   // cerr << "Min:\t" << t->min << endl; 
     t->next = NULL;
     top->next= t;
 	t->prev = top;

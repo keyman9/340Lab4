@@ -1,6 +1,6 @@
 /* 
  * File:   main.cpp
- * Author: Usman Khalid, Koy Voss, Spencer Scott
+ * Author: Usman Khalid, Koy Voss, Spencer Scott, Diego Bustamante, Shane Chamberlain
  *
  * Created on March 17, 2016, 2:14 PM
  */
@@ -26,7 +26,7 @@ int main() {
 	cout <<"##################################"<<endl;
 	cout <<"Enter team list file name: ";
 	cin >> teamFile;
-	cout <<endl;
+	cout << endl;
 	cout <<"Enter city list file name: ";
 	cin >> cityFile;
 	cout <<endl;
@@ -57,30 +57,38 @@ int main() {
 	Team* slowest = new Team();
 	//for(int i = 0; i < teamsInRace; teamsInRace--){
 		//for(int j = 0; j < cities.size(); j++){
-			theRace.nextLeg(nextCity,teamsInRace,slowest);
+	for(int i = 0; i < teamNames.size(); i++){
+			nextCity = cities[i];
+			slowest = theRace.nextLeg(nextCity,teamsInRace,slowest);
+			teamsInRace--;
+			cout << "Slowest " << slowest->getName() << endl;
+			theFinish.push(slowest);
+	}
 			//theFinish.push(slowest);
 		//}
 	//}
 
 
-	//cerr << "Original Queue: " << endl;
+	cerr << "Original Queue: " << endl;
 	//theRace.printQueue();
-	//cerr << "Finish Queue after round 1: " << endl;
-	//theFinish.printQueue();
+	cerr << "Finish Queue after round 1: " << endl;
+	theFinish.printQueue();
 
 ///
 	//cout <<"This is the round vale " << lap <<endl;
 
 	for (int x = 0; x < lap; x ++){
-		cout <<"The "<< teamNames[x]<<" were the last team to reach " <<cities[x]<<endl;
+		cout <<"The "<< theFinish.pop()->getName() <<" were the last team to reach " <<cities[x]<<endl;
 		cout <<endl;
 
 	}
 	cout <<"TEAMS         ";
 	for (int x = 1; x <= lap; x ++){
 		cout<< "      Round " << x;
-			}
+	}
 	cout <<endl;
+
+	cout << 
 	cout <<"##################################"<<endl;
 	cout <<"##       THANKS  FOR PLAYING!   ##"<<endl;
 	cout <<"##################################"<<endl;
