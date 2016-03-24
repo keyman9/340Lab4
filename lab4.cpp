@@ -16,7 +16,7 @@ using namespace std;
 
 void readTeamName(Queue &list);
 vector<string> readCityName(int &round);
-Team *fastestTeam(Team* t[], int size);
+Team * fastestTeam(Team* t[], int size);
 int main() {
 	cout <<"##################################"<<endl;
 	cout <<"## WELCOME TO THE AMAZING RACE! ##"<<endl;
@@ -42,13 +42,14 @@ int main() {
 
 	cerr << "Original Size: " << theRace.getSize() << endl;
 	string nextCity = "Brussels";
+	
 
-	/*	
-	Team* lostRaceLeg = NULL;
-	//WHILE THERE IS A CITY ON THE LINE OF THE CITY FILE
-		lostRaceLeg = theRace.nextLeg(nextCity);
-		theFinish.push(lostRaceLeg);
-	*/
+	//while cities to race
+	Team* slowest = NULL;
+	theRace.nextLeg(nextCity);
+	theFinish.push(slowest);
+
+
 	cerr << "Original Queue: " << endl;
 	theRace.printQueue();
 	cerr << "Finish Queue after round 1: " << endl;
@@ -102,7 +103,7 @@ vector<string> readCityName(int &lap){
 	lap =city.size();
 	return city;
 }
-Team *fastestTeam(Team* t[], int size){
+Team * fastestTeam(Team* t[], int size){
 	Team *tempArray [size];
 	Team *fastest =  NULL;
 	Team *next = NULL;
@@ -121,5 +122,5 @@ Team *fastestTeam(Team* t[], int size){
 		}
 		tempArray[n] = fastest;
 	}
-	return tempArray;
+	return *tempArray;
 }
