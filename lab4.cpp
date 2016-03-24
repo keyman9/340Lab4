@@ -23,7 +23,7 @@ int main() {
 	cout <<"##################################"<<endl;
 	cout <<"Enter team list file naem: ";
 	cout <<endl;
-	cout <<"Enter cit list file name: ";
+	cout <<"Enter city list file name: ";
 	cout <<endl;
 	int lap = 0;
 	vector<string> cities = readCityName(lap);
@@ -81,12 +81,15 @@ void readTeamName(Queue &list){
     infile.open("teams.txt");
 	string teamName;
 	Team* tempTeam;
+	int c;
  	while(!infile.eof()){
 		getline(infile,teamName);
 		//cout << teamName << endl;
+		if (teamName!=""){
   		tempTeam = new Team(teamName);
 		//cout << tempNode->getData().getName() << endl;
 		list.push(tempTeam);
+		}
 	}
 
 }
