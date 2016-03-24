@@ -42,14 +42,13 @@ int main() {
 
 	cerr << "Original Size: " << theRace.getSize() << endl;
 	string nextCity = "Brussels";
-	
 
-	//while cities to race
-	Team* slowest = NULL;
-	theRace.nextLeg(nextCity,slowest);
-	theFinish.push(slowest);
-
-
+	/*	
+	Team* lostRaceLeg = NULL;
+	//WHILE THERE IS A CITY ON THE LINE OF THE CITY FILE
+		lostRaceLeg = theRace.nextLeg(nextCity);
+		theFinish.push(lostRaceLeg);
+	*/
 	cerr << "Original Queue: " << endl;
 	theRace.printQueue();
 	cerr << "Finish Queue after round 1: " << endl;

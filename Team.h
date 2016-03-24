@@ -7,17 +7,15 @@ using namespace std;
 class Team{
 private:
     string name;
-	bool lapTimed;
 	Team* next;
 	Team* prev;
 	Time* top;
 public:
 	Team();
 	Team(string Name);
+	Team(string n, Team* tN, Team* tP, Time* t){ name=n;next=tN;prev=tP;top=t;} 
 	~Team(){ delete next; delete prev; delete top; }
 	string getName();
-	bool getLapTimed(){ return lapTimed; }
-	void lapToggle(){ lapTimed = !lapTimed; }
 	void setTime(string c);
 	Time* getTime(){ return top; }
 	bool ranFaster(Team* compare);
@@ -63,13 +61,11 @@ void Team::setTime(string c){
 Team::Team(){
     name = "";
 	next=prev=NULL;
-	lapTimed = false;
 	top = new Time();
 }
 
 Team::Team(string Name){
     name = Name;
-	lapTimed = false;
 	top = new Time();
     top->hour=0;
     top->min=0;
