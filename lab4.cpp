@@ -16,7 +16,7 @@ using namespace std;
 
 void readTeamName(Queue &list);
 vector<string> readCityName(int &round);
-Team * fastestTeam(Team* t[], int size);
+vector <Team> teamList;
 int main() {
 	cout <<"##################################"<<endl;
 	cout <<"## WELCOME TO THE AMAZING RACE! ##"<<endl;
@@ -45,9 +45,9 @@ int main() {
 	
 
 	//while cities to race
-	Team* slowest = NULL;
+	//Team* slowest = NULL;
 	theRace.nextLeg(nextCity);
-	theFinish.push(slowest);
+	//theFinish.push(slowest);
 
 
 	cerr << "Original Queue: " << endl;
@@ -76,22 +76,21 @@ int main() {
 
 }
 
-void readTeamName(Queue &list){
+	void readTeamName(Queue &list){
     ifstream infile;
     infile.open("teams.txt");
 	string teamName;
 	Team* tempTeam;
 	int c;
+	
  	while(!infile.eof()){
 		getline(infile,teamName);
-		//cout << teamName << endl;
 		if (teamName!=""){
   		tempTeam = new Team(teamName);
-		//cout << tempNode->getData().getName() << endl;
+  		teamList.push_back(tempTeam);
 		list.push(tempTeam);
 		}
 	}
-
 }
 
 vector<string> readCityName(int &lap){
@@ -105,25 +104,4 @@ vector<string> readCityName(int &lap){
 	}
 	lap =city.size();
 	return city;
-}
-Team * fastestTeam(Team* t[], int size){
-	Team *tempArray [size];
-	Team *fastest =  NULL;
-	Team *next = NULL;
-	int min= 50000;
-	int index;
-	for(int n=0; n < size; n++){
-		fastest = t[n];
-		for (int i = n + 1; i < size; i ++){
-			next= t[i];
-			if(fastest->getTimeInMin() < next->getTimeInMin()){
-				tempArray[n]=t[n];
-			}
-			else{
-				fastest= t[i];
-			}	
-		}
-		tempArray[n] = fastest;
-	}
-	return *tempArray;
 }

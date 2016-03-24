@@ -17,6 +17,7 @@ class Queue{
 		void setHead(Team* n){head = n;}
 		void printQueue();
 		Team* nextLeg(string city);
+		Team * fastestTeam(Team* t[], int size);
 };
 
 void Queue::push(Team* n){
@@ -65,15 +66,40 @@ void Queue::printQueue(){
 }
 
 Team* Queue::nextLeg(string city){
+	cout <<"inside the nextLeg method"<<endl;
 	Team* race = new Team[size];
 	int itemCount = size;
 	for(int i = 0; i < itemCount; i++){
+		cout <<"inside the first for loop"<<endl;
 		Team temp = *pop();
 		temp.setTime(city);
 		race[i] = temp;
 	}
-	///FUNCTION CALL
+		Team *Order = fastestTeam(&race, size);
 	for(int i = 0; i < size; i++){
+		cout <<"print test" <<endl;
 		//push(race[i])	
 	} 	
 }
+Team * Queue::fastestTeam(Team* t[], int size){
+	Team *tempArray [size];
+	Team *fastest =  NULL;
+	Team *next = NULL;
+	int min= 50000;
+	int index;
+	for(int n=0; n < size; n++){
+		fastest = t[n];
+		for (int i = n + 1; i < size; i ++){
+			next= t[i];
+			if(fastest->getTimeInMin() < next->getTimeInMin()){
+				tempArray[n]=t[n];
+			}
+			else{
+				fastest= t[i];
+			}	
+		}
+		tempArray[n] = fastest;
+	}
+	return *tempArray;
+}
+

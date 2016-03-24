@@ -45,7 +45,9 @@ bool Team::ranFaster(Team* compare){
 	}
 }
 void Team::setTime(string c){
+	cout <<" inside the set time method"<<endl;
     Time *t = new Time();
+    cout <<" created the time object t"<<endl;
     t->city = c;
     t->hour = rand() % 23 + 5;
     cout << "Hour:\t" << t->hour << endl;
