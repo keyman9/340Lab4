@@ -80,6 +80,7 @@ Team* Queue::nextLeg(string city){
 	Team *Order = fastestTeam(&race, size);
 	cerr << "Ordered set" << endl;
 	for(int i = 0; i < size; i++){
+		cout << Order<<endl;
 		cout <<"print test" <<endl;
 		//push(race[i])	
 	} 	

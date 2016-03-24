@@ -17,13 +17,17 @@ using namespace std;
 void readTeamName(Queue &list);
 vector<string> readCityName();
 vector<string> readTeamNames();
+string teamFile;
+string cityFile;
 int main() {
 	cout <<"##################################"<<endl;
 	cout <<"## WELCOME TO THE AMAZING RACE! ##"<<endl;
 	cout <<"##################################"<<endl;
-	cout <<"Enter team list file naem: ";
+	cout <<"Enter team list file name: ";
+	cin >> teamFile;
 	cout <<endl;
 	cout <<"Enter city list file name: ";
+	cin >> cityFile;
 	cout <<endl;
 	int lap = 0;
 	vector<string> cities = readCityName();
@@ -82,7 +86,7 @@ vector<string> readCityName(){
 	ifstream infile;
 	string cityName;
 	vector<string> city;
-	infile.open("cities.txt");
+	infile.open(cityFile.c_str());
 	while(!infile.eof()){
 		getline(infile,cityName);
 		if(cityName!=""){
@@ -96,7 +100,7 @@ vector<string> readTeamNames(){
 	ifstream infile;
 	string teamName;
 	vector<string> teamNames;
-	infile.open("teams.txt");
+	infile.open(teamFile.c_str());
 	while(!infile.eof()){
 		getline(infile,teamName);
 		if(teamName!=""){
