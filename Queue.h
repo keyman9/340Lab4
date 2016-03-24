@@ -86,9 +86,9 @@ Team* Queue::nextLeg(string city, int teamsRacing, Team* slowest){
 		cout << race[i]->getName() <<endl;
 		tempCount++;
 	}
-	cout << "After first for" << endl;
+	//cout << "After first for" << endl;
 	for(int n=0; n < itemCount; n++){
-		cout << race[n]->getName() << " in second for loop" << endl;
+		//cout << race[n]->getName() << " in second for loop" << endl;
 		fastest = race[n];
 		cout << fastest->getName()<<endl;
 		int fastestIndex = n;
@@ -97,7 +97,7 @@ Team* Queue::nextLeg(string city, int teamsRacing, Team* slowest){
 		for (int i = n+ 1; i < itemCount; i++){
 			if(i < teamsRacing){
 				next= race[i];
-				cerr << i << " i value" << endl;
+				//cerr << i << " i value" << endl;
 				if(fastest->getTimeInMin() > next->getTimeInMin()){
 					fastest = next;
 					fastestIndex = i;

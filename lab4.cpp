@@ -15,10 +15,11 @@
 using namespace std;
 
 void readTeamName(Queue &list);
-vector<string> readCityName();
+vector<string> readCityName(int &lap);
 vector<string> readTeamNames();
 string teamFile;
 string cityFile;
+int lap= 0;
 int main() {
 	cout <<"##################################"<<endl;
 	cout <<"## WELCOME TO THE AMAZING RACE! ##"<<endl;
@@ -30,7 +31,7 @@ int main() {
 	//cin >> cityFile;
 	cout <<endl;
 	int lap = 0;
-	vector<string> cities = readCityName();
+	vector<string> cities = readCityName(lap);
 	vector<string> teamNames = readTeamNames();
 
 	Queue theRace = Queue();
@@ -71,7 +72,7 @@ int main() {
 	cout <<"This is the round vale " << lap <<endl;
 
 	for (int x = 0; x < lap; x ++){
-		cout <<"The "<<x <<" were the last team to reach " <<cities[x]<<endl;
+		cout <<"The "<< x<<" were the last team to reach " <<cities[x]<<endl;
 
 	}
 	cout <<"TEAMS         ";
@@ -79,7 +80,6 @@ int main() {
 		cout<< "      Round " << x;
 			}
 	cout <<endl;
-	theRace.printQueue();
 	cout <<"##################################"<<endl;
 	cout <<"##       THANKS  FOR PLAYING!   ##"<<endl;
 	cout <<"##################################"<<endl;
@@ -87,7 +87,7 @@ int main() {
     return 0;
 
 }
-vector<string> readCityName(){
+vector<string> readCityName(int &lap){
 	ifstream infile;
 	string cityName;
 	vector<string> city;
@@ -96,7 +96,9 @@ vector<string> readCityName(){
 	while(!infile.eof()){
 		getline(infile,cityName);
 		if(cityName!=""){
+			lap ++;
 			city.push_back(cityName);
+			//cout <<"the value of lap is " << lap <<endl;
 		}
 	}
 	return city;
