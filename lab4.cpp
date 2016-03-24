@@ -63,16 +63,17 @@ int main() {
 	//}
 
 
-	cerr << "Original Queue: " << endl;
-	theRace.printQueue();
-	cerr << "Finish Queue after round 1: " << endl;
-	theFinish.printQueue();
+	//cerr << "Original Queue: " << endl;
+	//theRace.printQueue();
+	//cerr << "Finish Queue after round 1: " << endl;
+	//theFinish.printQueue();
 
 ///
-	cout <<"This is the round vale " << lap <<endl;
+	//cout <<"This is the round vale " << lap <<endl;
 
 	for (int x = 0; x < lap; x ++){
-		cout <<"The "<< x<<" were the last team to reach " <<cities[x]<<endl;
+		cout <<"The "<< teamNames[x]<<" were the last team to reach " <<cities[x]<<endl;
+		cout <<endl;
 
 	}
 	cout <<"TEAMS         ";
