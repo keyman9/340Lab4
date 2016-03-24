@@ -9,4 +9,5 @@ struct Time{
     Time *next;
     Time *prev;
     Time(){ hour = min = 0; }
+    int timeInMin;
 };

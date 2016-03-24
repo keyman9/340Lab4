@@ -16,12 +16,12 @@ using namespace std;
 
 void readTeamName(Queue &list);
 vector<string> readCityName(int &round);
-
+Team *fastestTeam(Team* t[], int size);
 int main() {
 	cout <<"##################################"<<endl;
 	cout <<"## WELCOME TO THE AMAZING RACE! ##"<<endl;
 	cout <<"##################################"<<endl;
-	cout <<"Enter team list file name: ";
+	cout <<"Enter team list file naem: ";
 	cout <<endl;
 	cout <<"Enter cit list file name: ";
 	cout <<endl;
@@ -33,7 +33,10 @@ int main() {
 	Queue theFinish = Queue();
 
     readTeamName(theRace);
-	
+   
+	cerr << "--Print queue." << endl;
+	theRace.printQueue();
+
 	cerr << "--Print queue." << endl;
 	theRace.printQueue();
 
@@ -70,6 +73,7 @@ int main() {
 	cout <<"##################################"<<endl;
 
     return 0;
+
 }
 
 void readTeamName(Queue &list){
@@ -98,4 +102,25 @@ vector<string> readCityName(int &lap){
 	}
 	lap =city.size();
 	return city;
+}
+Team *fastestTeam(Team* t[], int size){
+	Team *tempArray [size];
+	Team *fastest =  NULL;
+	Team *next = NULL;
+	int min= 50000;
+	int index;
+	for(int n=0; n < size; n++){
+		fastest = t[n];
+		for (int i = n + 1; i < size; i ++){
+			next= t[i];
+			if(fastest->getTimeInMin() < next->getTimeInMin()){
+				tempArray[n]=t[n];
+			}
+			else{
+				fastest= t[i];
+			}	
+		}
+		tempArray[n] = fastest;
+	}
+	return tempArray;
 }

@@ -71,23 +71,17 @@ void Queue::nextLeg(string city, Team* slowest){
 	cerr << "---End temp Queue--" << endl;
 	Team* firstTeam = NULL;
     Team* nextTeam = NULL;
-    //fastest->setTime(city);	
-
 	Team* fastest = NULL;
     //function is still reordering the main queue
-	for(int n= size; n > 0; n--){
+	for(int i= size; i > 0; i--){
 		cerr << "!!!!!!!!!OUTER FOR BEGIN!!!!!!!!!!" << endl;
 		cerr << "First for begin" << endl;
 		fastest = pop();
 		firstTeam = fastest;						
 		cerr << fastest->getName() << " is fastest." << endl;
-		fastest->setTime(city);					//set its time
-		cerr << "Time set." << endl;				//Team time set this lap
-		for(int i = n-1; i > 0; i--){
-			cerr << "----------INNER FOR----------" <<endl;			//# teams this round
-			cerr << "Teams still to run: " << i << endl;
 		if(fastest->getCity() != city){
-			fastest->setTime(city);					
+			fastest->setTime(city);
+		}					
 		//set its time
 		cerr << "Time set." << endl;				
 		//Team time set this lap

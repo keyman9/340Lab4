@@ -26,6 +26,8 @@ public:
 	void setNext(Team* n){ next = n; }
 	Team* getPrev(){ return prev; }
 	void setPrev(Team* p){ prev = p; }
+	int getTimeInMin(){ return top->timeInMin; }
+
 };
 
 bool Team::ranFaster(Team* compare){
@@ -55,6 +57,7 @@ void Team::setTime(string c){
     top->next= t;
 	t->prev = top;
     top = top->next;
+    top->timeInMin = (top->hour*60)+(top->min);
 }
 
 Team::Team(){
