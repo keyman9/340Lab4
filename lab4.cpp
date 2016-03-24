@@ -19,7 +19,7 @@ vector<string> readCityName(int &lap);
 vector<string> readTeamNames();
 string teamFile;
 string cityFile;
-int lap= 0;
+int lap= 1;
 int main() {
 	cout <<"##################################"<<endl;
 	cout <<"## WELCOME TO THE AMAZING RACE! ##"<<endl;
@@ -76,7 +76,7 @@ int main() {
 
 	}
 	cout <<"TEAMS         ";
-	for (int x = 0; x < lap; x ++){
+	for (int x = 1; x <= lap; x ++){
 		cout<< "      Round " << x;
 			}
 	cout <<endl;
