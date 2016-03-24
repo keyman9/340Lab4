@@ -40,21 +40,26 @@ int main() {
 		theRace.push(new Team(teamNames.at(i)));
 	   // readTeamName(theRace);
 	}
-   
-	cerr << "--Print queue." << endl;
+	int teamsInRace = theRace.getSize();
+	   
+	cerr << "--Print theRace queue." << endl;
 	theRace.printQueue();
 
-	cerr << "--Print queue." << endl;
-	theRace.printQueue();
+	cerr << "--Print theFinish queue." << endl;
+	theFinish.printQueue();
 
 	cerr << "Original Size: " << theRace.getSize() << endl;
 	string nextCity = "Brussels";
 	
-
-	//while cities to race
-	//Team* slowest = NULL;
-	theRace.nextLeg(nextCity);
-	//theFinish.push(slowest);
+	
+	//while teamsInRace to race
+	Team* slowest = new Team();
+	//for(int i = 0; i < teamsInRace; teamsInRace--){
+		//for(int j = 0; j < cities.size(); j++){
+			theRace.nextLeg(nextCity,teamsInRace,slowest);
+			theFinish.push(slowest);
+		//}
+	//}
 
 
 	cerr << "Original Queue: " << endl;
@@ -111,6 +116,3 @@ vector<string> readTeamNames(){
 	}
 	return teamNames;
 }
-
-
-

@@ -16,7 +16,10 @@ class Queue{
 		void setTail(Team* n){tail = n;}
 		void setHead(Team* n){head = n;}
 		void printQueue();
-		Team* nextLeg(string city);
+		//string nextLeg(string city);
+			//return slowest team name
+
+		Team* nextLeg(string city, int teamsRacing, Team* slowest);
 		//Team * fastestTeam(Team* t[], int size);
 };
 
@@ -65,38 +68,54 @@ void Queue::printQueue(){
    	}
 }
 
-Team* Queue::nextLeg(string city){
+
+Team* Queue::nextLeg(string city, int teamsRacing, Team* slowest){
 	//cout <<"inside the nextLeg method"<<endl;
-	//Team* race = new Team[size];
-	Team* slowest; 
-	Team *race [size];
+	//Team* race = new Team[size]; 
+	vector<Team*> race;
 	int itemCount = size;
-	Team *fastest =  NULL;
-	Team *next = NULL;
-	for(int i = 0; i < itemCount; i++){
+	Team* fastest = new Team();
+	Team* next = new Team();
+	int tempCount = 0;
+	//for(int i = 0; i < itemCount; i++){
+	for(int i = 0; i < teamsRacing; i++){
 		//cout <<"inside the first for loop"<<endl;
 		Team *temp = pop();
 		temp->setTime(city);
-		race[i] = temp;
-		//cout << race[i] <<endl;
+		race.push_back(temp);
+		cout << race[i]->getName() <<endl;
 		cerr << "race set to temp" << endl;
+		tempCount++;
 	}
-	for(int n=0; n < size; n++){
+	cout << "After first for" << endl;
+	for(int n=0; n < itemCount; n++){
+		cout << race[n]->getName() << " in second for loop" << endl;
 		fastest = race[n];
-		cout << fastest->getTime()<<endl;
-		for (int i = n + 1; i < size; i ++){
-			next= race[i];
-			if(fastest->getTimeInMin() > next->getTimeInMin()){
-				fastest = next;
-			}	
+		cout << "Here" << endl;
+		cout << fastest->getName()<<endl;
+		int fastestIndex = n;
+		for (int i = n + 1; i < itemCount; i++){
+			if(i < teamsRacing){
+				next= race[i];
+				cerr << i << " i value" << endl;
+				if(fastest->getTimeInMin() > next->getTimeInMin()){
+					fastest = next;
+					fastestIndex = i;
+				}
+			}
+			cout << "After if" << endl;
 		}
-		if (size > 1){
-		push(fastest);
-	}
-	if (size =1){
-		slowest = fastest;
-	}
-	}
-	return slowest;
-}
+		
+		if (tempCount > 1){
+			push(fastest);
+			cerr << "Pushed " << fastest->getName() << endl;
+			tempCount--;
+		}
+		else{
+			slowest = fastest;
+		}
 
+	}
+	delete fastest;
+	delete next;
+}

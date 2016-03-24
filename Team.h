@@ -1,7 +1,7 @@
 #include<string>
 #include<cstdlib>
 #include "Time.h"
-
+#include<iostream>
 using namespace std;
 
 class Team{
@@ -45,14 +45,14 @@ bool Team::ranFaster(Team* compare){
 	}
 }
 void Team::setTime(string c){
-	cout <<" inside the set time method"<<endl;
+	//cerr <<" inside the set time method"<<endl;
     Time *t = new Time();
-    cout <<" created the time object t"<<endl;
+    //cerr <<" created the time object t"<<endl;
     t->city = c;
     t->hour = rand() % 23 + 5;
-    cout << "Hour:\t" << t->hour << endl;
+    cerr << "Hour:\t" << t->hour << endl;
     t->min = rand() % 59 + 0;
-    cout << "Min:\t" << t->min << endl; 
+    cerr << "Min:\t" << t->min << endl; 
     t->next = NULL;
     top->next= t;
 	t->prev = top;
