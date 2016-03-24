@@ -71,11 +71,14 @@ Team* Queue::nextLeg(string city){
 	int itemCount = size;
 	for(int i = 0; i < itemCount; i++){
 		cout <<"inside the first for loop"<<endl;
-		Team temp = *pop();
-		temp.setTime(city);
-		race[i] = temp;
+		Team* temp = pop();
+		temp->setTime(city);
+		race[i] = *temp;
+		cerr << "race set to temp" << endl;
 	}
+	cerr << "All items added to array" << endl;
 	Team *Order = fastestTeam(&race, size);
+	cerr << "Ordered set" << endl;
 	for(int i = 0; i < size; i++){
 		cout <<"print test" <<endl;
 		//push(race[i])	

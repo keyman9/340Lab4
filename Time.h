@@ -8,6 +8,6 @@ struct Time{
 	string city;
     Time *next;
     Time *prev;
-    Time(){ hour = min = 0; }
+    Time(){ hour = min = timeInMin = 0; city=""; next = prev = NULL; }
     int timeInMin;
 };

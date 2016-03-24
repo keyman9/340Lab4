@@ -78,29 +78,6 @@ int main() {
     return 0;
 
 }
-
-
-/*
-void readTeamName(Queue &list){
-    ifstream infile;
-    infile.open("teams.txt");
-	string teamName;
-	Team* tempTeam;
-	int c;
-	
- 	while(!infile.eof()){
-		getline(infile,teamName);
-		if (teamName!=""){
-  			tempTeam = new Team(teamName);
-  			teamList.push_back(tempTeam);
-			list.push(tempTeam);
-		}
-	}
-}
-*/
-
-
-
 vector<string> readCityName(){
 	ifstream infile;
 	string cityName;
